@@ -1,5 +1,11 @@
+seed: 42
+
 data:
-  train_path: /Users/ankitsajwan/tech/projects/vae/data/archive (3)/02-20-2018.csv
+  base_dir: /Users/ankitsajwan/tech/projects/vae/data/archive (3)/
+  train: train_compressed.parquet
+  val: val_compressed.parquet
+  test: test_compressed.parquet
+  raw_data: 02-20-2018.csv
   features:
     volume:
       - Tot Fwd Pkts
@@ -75,6 +81,14 @@ data:
       - Init Bwd Win Byts
       - Fwd Act Data Pkts
       - Fwd Seg Size Min
+
+dataloader:
+  batch_size: 64
+  num_workers: 4
+  shuffle: true
+
+# env: "colab"
+env: "local"
 
 database:
   host: localhost

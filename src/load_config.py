@@ -1,4 +1,6 @@
 import yaml
+import random
+import numpy as np
 
 class ConfigLoader:
     """Loads and provides access to configuration settings from a YAML file."""
@@ -6,6 +8,9 @@ class ConfigLoader:
     def __init__(self, config_path="config.yaml"):
         self.config_path = config_path
         self.config = self._load_config()
+        self.seed = self.config.get("seed", 42)
+        random.seed(self.seed)
+        np.random.seed(self.seed)
 
     def _load_config(self):
         """Loads YAML configuration file."""
