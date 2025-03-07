@@ -1,0 +1,99 @@
+data:
+  train_path: /Users/ankitsajwan/tech/projects/vae/data/archive (3)/02-20-2018.csv
+  features:
+    volume:
+      - Tot Fwd Pkts
+      - Tot Bwd Pkts
+      - TotLen Fwd Pkts
+      - TotLen Bwd Pkts
+      - Flow Byts/s
+      - Flow Pkts/s
+      - Fwd Pkts/s
+      - Bwd Pkts/s
+      - Subflow Fwd Pkts
+      - Subflow Bwd Pkts
+      - Subflow Fwd Byts
+      - Subflow Bwd Byts
+
+    time-based:
+      - Flow Duration
+      - Flow IAT Mean
+      - Flow IAT Std
+      - Flow IAT Max
+      - Flow IAT Min
+      - Fwd IAT Tot
+      - Fwd IAT Mean
+      - Fwd IAT Std
+      - Fwd IAT Max
+      - Fwd IAT Min
+      - Bwd IAT Tot
+      - Bwd IAT Mean
+      - Bwd IAT Std
+      - Bwd IAT Max
+      - Bwd IAT Min
+      - Active Mean
+      - Active Std
+      - Active Max
+      - Active Min
+      - Idle Mean
+      - Idle Std
+      - Idle Max
+      - Idle Min
+
+    packet-size:
+      - Fwd Pkt Len Max
+      - Fwd Pkt Len Min
+      - Fwd Pkt Len Mean
+      - Fwd Pkt Len Std
+      - Bwd Pkt Len Max
+      - Bwd Pkt Len Min
+      - Bwd Pkt Len Mean
+      - Bwd Pkt Len Std
+      - Pkt Len Min
+      - Pkt Len Max
+      - Pkt Len Mean
+      - Pkt Len Std
+      - Pkt Len Var
+      - Pkt Size Avg
+      - Fwd Seg Size Avg
+      - Bwd Seg Size Avg
+
+    protocol-flags:
+      - SYN Flag Cnt
+      - RST Flag Cnt
+      - PSH Flag Cnt
+      - ACK Flag Cnt
+      - URG Flag Cnt
+      - CWE Flag Count
+      - ECE Flag Cnt
+
+    connection-attributes:
+      - Fwd Header Len
+      - Bwd Header Len
+      - Down/Up Ratio
+      - Init Fwd Win Byts
+      - Init Bwd Win Byts
+      - Fwd Act Data Pkts
+      - Fwd Seg Size Min
+
+database:
+  host: localhost
+  port: 5432
+  username: user
+  password: pass
+
+server:
+  host: 0.0.0.0
+  port: 8080
+
+logging:
+  level: INFO
+  file: /var/log/app.log
+
+security:
+  enable_ssl: true
+  ssl_cert_path: /etc/ssl/certs/app_cert.pem
+
+features:
+  enable_feature_x: true
+  enable_feature_y: false
