@@ -82,32 +82,28 @@ data:
       - Fwd Act Data Pkts
       - Fwd Seg Size Min
 
-dataloader:
+train_loader:
+  batch_size: 64
+  num_workers: 4
+  shuffle: true
+
+val_loader:
   batch_size: 64
   num_workers: 4
   shuffle: true
 
 # env: "colab"
-env: "local"
+# device: "cuda"
+epochs: 10 
+device: "mps"
 
-database:
-  host: localhost
-  port: 5432
-  username: user
-  password: pass
+model:
+  learning_rate: 0.001
+  input_dim: 65
+  latent_dim: 5
+  hidden_dims:
+    - 100
+    - 50
 
-server:
-  host: 0.0.0.0
-  port: 8080
 
-logging:
-  level: INFO
-  file: /var/log/app.log
-
-security:
-  enable_ssl: true
-  ssl_cert_path: /etc/ssl/certs/app_cert.pem
-
-features:
-  enable_feature_x: true
-  enable_feature_y: false
+  

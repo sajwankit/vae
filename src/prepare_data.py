@@ -151,7 +151,7 @@ if __name__ == "__main__":
     df["Timestamp"] = pd.to_datetime(df["Timestamp"])  # Ensure timestamp is in datetime format
     unique_pairs = df.groupby(["Src IP", "Dst IP"]).ngroups
     print(f"Number of unique (src ip, dst ip) pairs: {unique_pairs}")
-    if config["env"] == "local":
+    if config["device"] == "mpu":
         # Filter to keep 1000 rows: 900 benign and 100 non-benign
         benign_df = df[df["Label"] == "Benign"].sample(900, random_state=config["seed"])
         

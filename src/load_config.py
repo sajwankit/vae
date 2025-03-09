@@ -1,11 +1,14 @@
 import yaml
 import random
 import numpy as np
+from pathlib import Path
+
 
 class ConfigLoader:
     """Loads and provides access to configuration settings from a YAML file."""
 
-    def __init__(self, config_path="config.yaml"):
+    def __init__(self, config_path):
+
         self.config_path = config_path
         self.config = self._load_config()
         self.seed = self.config.get("seed", 42)

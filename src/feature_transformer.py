@@ -70,7 +70,7 @@ class FeaturesTransformer:
         """
         feature_types = self._get_features_by_type().keys()
 
-        if self.mode == "test":
+        if self.mode != "train":
             self._load_scalers(feature_types)
 
         # Apply transformations based on feature type
