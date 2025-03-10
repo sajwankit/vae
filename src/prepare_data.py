@@ -143,10 +143,19 @@ class PrepareData:
 
 
 if __name__ == "__main__":
-    config = ConfigLoader(config_path="/Users/ankitsajwan/tech/projects/vae/config/config.yaml").config
+    import os
+
+    # Get current working directory
+    current_dir = os.getcwd()
+
+    # Move one directory up
+    parent_dir = Path(os.path.dirname(current_dir))
+    config_path = parent_dir / "vae/config/config.yaml"
+    config = ConfigLoader(config_path).config
+
     data_dir = Path(config["data"]["base_dir"])
     # Load dataset
-    df = pd.read_csv(data_dir / config["data"]["raw_data"])
+    df = pd.read_csv(config["data"]["raw_data"])
 
     df["Timestamp"] = pd.to_datetime(df["Timestamp"])  # Ensure timestamp is in datetime format
     unique_pairs = df.groupby(["Src IP", "Dst IP"]).ngroups

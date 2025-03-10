@@ -1,11 +1,13 @@
 seed: 42
 
 data:
-  base_dir: /Users/ankitsajwan/tech/projects/vae/data/archive (3)/
+  # base_dir: /Users/ankitsajwan/tech/projects/vae/data/archive (3)/
+  base_dir: /kaggle/working/
   train: train_compressed.parquet
   val: val_compressed.parquet
   test: test_compressed.parquet
-  raw_data: 02-20-2018.csv
+  raw_data: /kaggle/input/ids-intrusion-csv/02-20-2018.csv
+  # raw_data: /Users/ankitsajwan/tech/projects/vae/data/archive (3)/02-20-2018.csv
   features:
     volume:
       - Tot Fwd Pkts
@@ -93,9 +95,9 @@ val_loader:
   shuffle: true
 
 # env: "colab"
-# device: "cuda"
+device: "cuda"
 epochs: 10 
-device: "mps"
+# device: "mps"
 
 model:
   learning_rate: 0.001
