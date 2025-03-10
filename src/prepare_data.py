@@ -138,7 +138,7 @@ class PrepareData:
             elif df[col].dtype == "float64":
                 if col_max < np.finfo(np.float32).max:
                     df[col] = df[col].astype(np.float32)
-        df = df[["Src IP", "Dst IP", "Timestamp", "split"] + selected_columns]
+        df = df[["Src IP", "Dst IP", "Timestamp", "split" + "Label"] + selected_columns]
         return df
 
 

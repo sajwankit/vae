@@ -1,7 +1,7 @@
 from load_config import ConfigLoader
 from dataloaders import VAEDataset
 from models import VAE
-
+import pandas as pd
 
 from torch.utils.data import DataLoader
 
@@ -64,10 +64,22 @@ class VAEDDoSTrainer:
                 val_loss += loss.item()
         return val_loss / len(self.val_loader)
 
+    def test(self):
+        test_losses = []
+        self.model.eval()
+        with torch.no_grad():
+            for i, x in enumerate(self.test_loader):
+                x = x.to(self.device)
+                x_reconstructed, mu, logvar = self.model(x)
+                reconstruction_loss, _ = self.vae_loss(x, x_reconstructed, mu, logvar, reduction='none')
+                loss = reconstruction_loss.mean(dim=-1).tolist()
+                test_losses.extend(loss)
+        return test_losses
+
     # Define the loss function
-    def vae_loss(self, x, x_reconstructed, mu, logvar):
+    def vae_loss(self, x, x_reconstructed, mu, logvar, reduction='mean'):
         # 1. Reconstruction Loss (MSE)
-        reconstruction_loss = F.mse_loss(x_reconstructed, x, reduction='mean')
+        reconstruction_loss = F.mse_loss(x_reconstructed, x, reduction=reduction)
         kl_divergence = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
         return reconstruction_loss, kl_divergence
 
@@ -91,13 +103,26 @@ if __name__ == "__main__":
     parent_dir = Path(os.path.dirname(current_dir))
     config_path = parent_dir / "vae/config/config.yaml"
     config = ConfigLoader(config_path).config
+
+
     train_dataset = VAEDataset(config=config, mode="train")
 
     train_loader = DataLoader(train_dataset, batch_size=config["train_loader"]["batch_size"], shuffle=True)
     val_dataset = VAEDataset(config=config, mode="val")
-    val_dataloader = DataLoader(val_dataset, batch_size=config["val_loader"]["batch_size"], shuffle=False)
+    val_loader = DataLoader(val_dataset, batch_size=config["val_loader"]["batch_size"], shuffle=False)
 
-    trainer = VAEDDoSTrainer(config, train_loader, val_dataloader)
+    test_dataset = VAEDataset(config=config, mode="test")
+    test_loader = DataLoader(test_dataset, batch_size=64*32, shuffle=False)
+
+    trainer = VAEDDoSTrainer(config, train_loader, val_loader, test_loader)
     trainer.train(epochs=config["epochs"])
 
+    test_df = pd.read_parquet(config["data"]["test"])
+    test_losses = trainer.test()
+    # test_losses = []
+    test_df["test_loss"] = test_losses
+    test_df.to_parquet(config["data"]["test"], index=False)
+
+    
+    
 

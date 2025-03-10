@@ -9,7 +9,7 @@ data:
   train: /kaggle/input/notebookb6347c8c13/train_compressed.parquet
   val: /kaggle/input/notebookb6347c8c13/val_compressed.parquet
   test: /kaggle/input/notebookb6347c8c13/test_compressed.parquet
-  # raw_data: /kaggle/input/ids-intrusion-csv/02-20-2018.csv
+  raw_data: /kaggle/input/ids-intrusion-csv/02-20-2018.csv
   # raw_data: /Users/ankitsajwan/tech/projects/vae/data/archive (3)/02-20-2018.csv
   features:
     volume:
@@ -99,7 +99,7 @@ val_loader:
 
 
 device: "cuda"
-epochs: 10 
+epochs: 1
 # device: "mps"
 
 model:
