@@ -76,7 +76,7 @@ class VAEDDoSTrainer:
             st = time.time()
             train_loss = self._train()
             val_loss = self._validate()
-            print(f"Epoch {epoch + 1}/{epochs}, Train loss: {train_loss / len(self.train_loader):.4f}, Val loss: {val_loss / len(self.val_loader):.4f}, Time: {time.time() - st:.4f}")
+            print(f"Epoch {epoch + 1}/{epochs}, Train loss: {train_loss :.4f}, Val loss: {val_loss :.4f}, Time: {time.time() - st:.4f}")
         print("Training complete!")
 
 
