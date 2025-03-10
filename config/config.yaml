@@ -2,7 +2,7 @@ seed: 42
 
 data:
   # base_dir: /Users/ankitsajwan/tech/projects/vae/data/archive (3)/
-  base_dir: /kaggle/working/
+  base_dir: /kaggle/input/notebookb6347c8c13/
   train: train_compressed.parquet
   val: val_compressed.parquet
   test: test_compressed.parquet
