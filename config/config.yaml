@@ -93,7 +93,7 @@ train_loader:
   shuffle: true
 
 val_loader:
-  batch_size: 64
+  batch_size: 2048
   num_workers: 4
   shuffle: true
 
