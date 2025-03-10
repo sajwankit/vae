@@ -21,11 +21,11 @@ class VAEDataset(Dataset):
         self.feature_transformer = FeaturesTransformer(config, mode=mode, scaler_dir=data_dir)
 
         if mode == "train":
-            data_path = data_dir / config["data"]["train"]
+            data_path = config["data"]["train"]
         elif mode == "val":
-            data_path = data_dir / config["data"]["val"]
+            data_path = config["data"]["val"]
         elif mode == "test":
-            data_path = data_dir / config["data"]["test"]
+            data_path = config["data"]["test"]
             
         self.data = pd.read_parquet(data_path)
         self.data = self.feature_transformer.transform(self.data)
